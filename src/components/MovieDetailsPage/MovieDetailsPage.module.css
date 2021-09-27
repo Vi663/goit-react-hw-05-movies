@@ -1,0 +1,10 @@
+.movieDitals {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.movieDitalsTitle {
+  font-weight: 700;
+  padding-top: 20px;
+}
