@@ -3,18 +3,17 @@ import { Link, useRouteMatch, useParams} from "react-router-dom";
 import { FetchFilmsByID, FetchFilmsCast } from "../../servises/FetchAPI";
 
 export function Cast() {
-  const [film, setFilm] = useState({})
-  const [team, setTeam] = useState([])
   const { movieId } = useParams()
-
+  console.log(useParams())
   useEffect(() => {
-    FetchFilmsByID(movieId).then(setFilm)
-    FetchFilmsCast(movieId).then(setTeam)
+    FetchFilmsCast(movieId)
   }, [movieId])
 
   return (
     <div>
-      {team.map(({ id, profile_path, name, character }) => (
+      {/* <span>{useParams()}</span> */}
+      <span>Hello</span>
+      {/* {team.map(({ id, profile_path, name, character }) => (
         <ul>
           <li key={id}>
             <img src={`https://image.tmdb.org/t/p/w300${profile_path}`} alt={name} />
@@ -22,7 +21,7 @@ export function Cast() {
             <span>Character: {character}</span>
           </li>
         </ul>
-      ))}
+      ))} */}
     </div>
   )
 }

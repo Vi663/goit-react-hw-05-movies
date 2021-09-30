@@ -4,7 +4,7 @@ import { Navigation } from "../Navigation/Navigation"
 import { HomePage } from '../HomePage/HomePage'
 import { MovieDetailsPage } from '../MovieDetailsPage/MovieDetailsPage'
 import { MoviesPage } from "../MoviesPage/MoviesPage"
-import { Cast } from '../Cast/Cast'
+
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,10 +27,6 @@ export function App() {
       
         <Route exact path="/movies">
           <MoviesPage onSubmit={onSubmit} />
-        </Route>
-
-        <Route path="/movies/:movieId/cast">
-          <Cast />
         </Route>
         
         <Route path="/movies/:movieId">
