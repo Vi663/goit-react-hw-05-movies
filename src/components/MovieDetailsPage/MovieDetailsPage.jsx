@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Route, NavLink, useRouteMatch, useParams} from "react-router-dom";
-import { fetchFilmsByID, fetchFilmsCast } from "../../servises/FetchAPI";
+import { fetchFilmsByID, fetchFilmsReviews } from "../../servises/FetchAPI";
 import { Cast } from '../Cast/Cast'
+import { MovieReviews } from "../MovieReviews/MovieReviews";
 import s from "./MovieDetailsPage.module.css"
 
 export function MovieDetailsPage () {
   
   const [film, setFilm] = useState({})
-  const [team, setTeam] = useState([])
+  const [reviews, setReviews] = useState([])
   const {poster_path, title, popularity, overview, genres} = film
   const { movieId } = useParams()
   const { url } = useRouteMatch()
@@ -15,8 +16,9 @@ export function MovieDetailsPage () {
 
   useEffect(() => {
     fetchFilmsByID(movieId).then(setFilm)
-    fetchFilmsCast(movieId).then(setTeam)
-  }, [movieId])
+    fetchFilmsReviews(movieId).then(setReviews)
+    console.log(reviews)
+  }, [])
   return (
     <div>
       <NavLink to='/'><button>Go back</button></NavLink>
@@ -40,6 +42,10 @@ export function MovieDetailsPage () {
       </ul>
       <Route path={`${url}/cast`}>
         <Cast cast={movieId} />
+      </Route>
+
+      <Route exact path={`${url}/reviews`}>
+        <MovieReviews reviews={movieId} />
       </Route>
     </div>
   )

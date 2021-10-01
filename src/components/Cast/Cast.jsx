@@ -4,10 +4,8 @@ import { fetchFilmsByID, fetchFilmsCast } from "../../servises/FetchAPI";
 
 export function Cast({movieId}) {
   const [team, setTeam] = useState([])
-  const [film, setFilm] = useState({})
 
   useEffect(() => {
-      fetchFilmsByID(movieId).then(setFilm)
       fetchFilmsCast(movieId).then(setTeam)
       console.log(movieId)
    }, [movieId])
