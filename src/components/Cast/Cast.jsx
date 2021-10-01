@@ -1,27 +1,28 @@
 import { useState, useEffect } from 'react'
 import { Link, useRouteMatch, useParams} from "react-router-dom";
-import { FetchFilmsByID, FetchFilmsCast } from "../../servises/FetchAPI";
+import { fetchFilmsByID, fetchFilmsCast } from "../../servises/FetchAPI";
 
-export function Cast() {
-  const { movieId } = useParams()
-  console.log(useParams())
+export function Cast({movieId}) {
+  const [team, setTeam] = useState([])
+  const [film, setFilm] = useState({})
+
   useEffect(() => {
-    FetchFilmsCast(movieId)
-  }, [movieId])
-
+      fetchFilmsByID(movieId).then(setFilm)
+      fetchFilmsCast(movieId).then(setTeam)
+      console.log(movieId)
+   }, [movieId])
+  
   return (
     <div>
-      {/* <span>{useParams()}</span> */}
-      <span>Hello</span>
-      {/* {team.map(({ id, profile_path, name, character }) => (
+      {team.cast && team.cast.map(({ id, profile_path, name, character }) => (
         <ul>
           <li key={id}>
             <img src={`https://image.tmdb.org/t/p/w300${profile_path}`} alt={name} />
-            <span>{name}</span>
+            <h1>{name}</h1>
             <span>Character: {character}</span>
           </li>
         </ul>
-      ))} */}
+      ))}
     </div>
   )
 }

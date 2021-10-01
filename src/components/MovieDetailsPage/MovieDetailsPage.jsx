@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react'
 import { Route, NavLink, useRouteMatch, useParams} from "react-router-dom";
-import { FetchFilmsByID, FetchFilmsCast } from "../../servises/FetchAPI";
+import { fetchFilmsByID, fetchFilmsCast } from "../../servises/FetchAPI";
 import { Cast } from '../Cast/Cast'
 import s from "./MovieDetailsPage.module.css"
 
 export function MovieDetailsPage () {
-  const [team, setTeam] = useState([])
+  
   const [film, setFilm] = useState({})
+  const [team, setTeam] = useState([])
   const {poster_path, title, popularity, overview, genres} = film
   const { movieId } = useParams()
   const { url } = useRouteMatch()
+  console.log(movieId)
 
   useEffect(() => {
-    FetchFilmsByID(movieId).then(setFilm)
-    FetchFilmsCast(movieId).then(setTeam)
+    fetchFilmsByID(movieId).then(setFilm)
+    fetchFilmsCast(movieId).then(setTeam)
   }, [movieId])
   return (
     <div>
@@ -37,16 +39,7 @@ export function MovieDetailsPage () {
         </li>
       </ul>
       <Route path={`${url}/cast`}>
-        {/* {console.log(team.cast)} */}
-        {team.cast.map(({ id, profile_path, name, character }) => (
-        <ul>
-          <li key={id}>
-            <img src={`https://image.tmdb.org/t/p/w150${profile_path}`} alt={name} />
-            <span>{name}</span>
-            <span>Character: {character}</span>
-          </li>
-        </ul>
-      ))}
+        <Cast cast={movieId} />
       </Route>
     </div>
   )

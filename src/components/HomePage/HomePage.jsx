@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useRouteMatch } from "react-router-dom";
-import { FetchTrendings } from "../../servises/FetchAPI";
+import { fetchTrendings } from "../../servises/FetchAPI";
 import { toast } from 'react-toastify';
 
 export function HomePage() {
@@ -10,7 +10,7 @@ export function HomePage() {
   useEffect(() => {
     const fetchFilms = async () => {
       try {
-        const { results } = await FetchTrendings();
+        const { results } = await fetchTrendings();
         setFilms(results)
       } catch (err) {
         toast.error('Not found!:', err.toString())
