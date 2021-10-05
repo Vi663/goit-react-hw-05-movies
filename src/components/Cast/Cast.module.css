@@ -1,0 +1,22 @@
+.castList {
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  list-style: none;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.castListItem{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 15px;
+  flex-direction: column;
+  min-width: 150px;
+  border: rgb(173, 162, 184) solid 5px;
+}
+
+.castListImage {
+  width: 150px;
+}

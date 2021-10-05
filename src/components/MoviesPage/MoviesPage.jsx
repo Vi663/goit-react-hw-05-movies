@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Link, useRouteMatch, useParams} from "react-router-dom";
-import { fetchFilmWithQuery } from "../../servises/FetchAPI";
+import { Link, useRouteMatch} from "react-router-dom";
+import { fetchFilmWithQuery } from "../../servises/fetchAPI";
 import { toast } from 'react-toastify';
 
-export function MoviesPage({onSubmit}) {
+export default function MoviesPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [films, setFilms] = useState([])
 
@@ -24,7 +24,6 @@ export function MoviesPage({onSubmit}) {
       }
     }
     fetchFilms()
-    console.log(searchQuery)
   }, [searchQuery])
 
   const handleInputChange = (e) => {
@@ -37,7 +36,6 @@ export function MoviesPage({onSubmit}) {
     if (searchQuery.trim() === "") {
       toast.error("Please, fulfill the search form")
     } else {
-      onSubmit(searchQuery);
       clearInput();
     }
   }
@@ -47,7 +45,6 @@ export function MoviesPage({onSubmit}) {
   }
 
   const { url } = useRouteMatch()
-  const params = useParams();
 
   return (
     <>

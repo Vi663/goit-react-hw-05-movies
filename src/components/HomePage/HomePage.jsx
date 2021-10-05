@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useRouteMatch } from "react-router-dom";
-import { fetchTrendings } from "../../servises/FetchAPI";
+import { fetchTrendings } from "../../servises/fetchAPI";
 import { toast } from 'react-toastify';
 
-export function HomePage() {
+export default function HomePage() {
   const [films, setFilms] = useState([])
   const { url } = useRouteMatch()
 
@@ -31,5 +31,4 @@ export function HomePage() {
     </ul>
     </div>
   )
-  
 }

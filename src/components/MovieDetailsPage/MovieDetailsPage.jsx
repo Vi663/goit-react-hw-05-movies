@@ -1,30 +1,28 @@
-import { useState, useEffect } from 'react'
-import { Route, NavLink, useRouteMatch, useParams} from "react-router-dom";
-import { fetchFilmsByID, fetchFilmsReviews } from "../../servises/FetchAPI";
-import { Cast } from '../Cast/Cast'
-import { MovieReviews } from "../MovieReviews/MovieReviews";
+import { useState, useEffect, lazy} from 'react'
+import { Route, NavLink, useParams, useLocation} from "react-router-dom";
+import { fetchFilmsByID } from "../../servises/fetchAPI";
 import s from "./MovieDetailsPage.module.css"
 
-export function MovieDetailsPage () {
+const Cast = lazy(() => import('../Cast/Cast'));
+const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
+
+export default function MovieDetailsPage () {
   
   const [film, setFilm] = useState({})
-  const [reviews, setReviews] = useState([])
   const {poster_path, title, popularity, overview, genres} = film
   const { movieId } = useParams()
-  const { url } = useRouteMatch()
-  console.log(movieId)
+  const location = useLocation()
 
   useEffect(() => {
     fetchFilmsByID(movieId).then(setFilm)
-    fetchFilmsReviews(movieId).then(setReviews)
-    console.log(reviews)
-  }, [])
+  }, [movieId])
+
   return (
-    <div>
-      <NavLink to='/'><button>Go back</button></NavLink>
-      <img src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt={title} />
-      <h2>{title}</h2>
-      <span className={s.movieDitals}>User Score: {popularity}</span>
+    <div className={s.movieContainer}>
+      <NavLink className={s.btnBack} to='/'><button>Go back</button></NavLink>
+      <img className={s.moviePoster} src={`https://image.tmdb.org/t/p/w300${poster_path}`} alt={title} />
+      <h2 className={s.movieDitailsTitle}>{title}</h2>
+      <span className={s.movieDitails}>User Score: {popularity}</span>
       <span className={s.movieDitalsTitle}>Overview</span>
       <span className={s.movieDitals}>{overview}</span>
       {genres && <span className={s.movieDitalsTitle}>Genres</span>}
@@ -32,20 +30,26 @@ export function MovieDetailsPage () {
       <hr />
       <span className={s.movieDitalsTitle}>Additional information</span>
       <hr />
-      <ul>
+      <ul className={s.additionalInfoList}>
         <li key='Cast'>
-          <NavLink to={`${url}/cast`}>Cast</NavLink>
+          <NavLink className={s.additionalInfoListItem} activeClassName={s.additionalInfoListItemActive} to={{
+            pathname: `/movies/${movieId}/cast`,
+            state: {from: location},
+          }}>Cast</NavLink>
         </li>
         <li key='Reviews'>
-          <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+          <NavLink className={s.additionalInfoListItem} activeClassName={s.additionalInfoListItemActive} to={{
+            pathname: `/movies/${movieId}/reviews`,
+            state: {from: location},
+          }}>Reviews</NavLink>
         </li>
       </ul>
-      <Route path={`${url}/cast`}>
-        <Cast cast={movieId} />
+      <Route path={`/movies/:movieId/cast`}>
+        <Cast movieId={movieId} />
       </Route>
 
-      <Route exact path={`${url}/reviews`}>
-        <MovieReviews reviews={movieId} />
+      <Route exact path={`/movies/:movieId/reviews`}>
+        <MovieReviews movieId={movieId} />
       </Route>
     </div>
   )

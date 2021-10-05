@@ -1,10 +1,45 @@
-.movieDitals {
+.movieContainer{
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.btnBack{
+  padding: 15px;
+  text-align: center;
+  border: none;
+  outline: none;
+  color: #489;
+}
+
+.moviePoster{
+  margin: auto;
+  width: 300px;
+}
+
+.movieDitails {
+  display: flex;
+  flex-direction: column;
 }
 
 .movieDitalsTitle {
   font-weight: 700;
   padding-top: 20px;
+}
+
+.additionalInfoList {
+  padding-inline-start: none;
+  list-style: none;
+}
+
+.additionalInfoListItem {
+  text-decoration: none;
+  font-weight: 500;
+  color: rgb(70, 70, 167);
+}
+
+.additionalInfoListItemActive{
+  text-decoration: none;
+  font-weight: 500;
+  color: rgb(155, 45, 45);
 }

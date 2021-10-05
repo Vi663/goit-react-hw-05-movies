@@ -2,9 +2,9 @@
   text-decoration: none;
   padding: 12px;
   font-weight: 500;
-  color: rgb(155, 45, 45);
+  color: rgb(70, 70, 167);
 }
 
 .activeLink {
-  color: rgb(70, 70, 167);
+  color: rgb(155, 45, 45);
 }

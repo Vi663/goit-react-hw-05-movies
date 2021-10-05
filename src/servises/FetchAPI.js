@@ -5,8 +5,8 @@ const KEY = '64d8aa762e5eca1f8be6b3971b76ddad';
 
 export async function fetchTrendings() {
   try {
-    const response = await axios.get(`/trending/movie/day?&api_key=${KEY}&language=en-US`)
-    return response.data;
+    const {data} = await axios.get(`/trending/movie/day?&api_key=${KEY}&language=en-US`)
+    return data;
   }catch (err) {
     throw err;
   }
@@ -14,8 +14,8 @@ export async function fetchTrendings() {
 
 export async function fetchFilmsByID(id) {
   try {
-    const response = await axios.get(`/movie/${id}?api_key=${KEY}&language=en-US`)
-    return response.data;
+    const {data} = await axios.get(`/movie/${id}?api_key=${KEY}&language=en-US`)
+    return data;
   }catch (err) {
     throw err;
   }
@@ -23,8 +23,8 @@ export async function fetchFilmsByID(id) {
 
 export async function fetchFilmsCast(id) {
   try {
-    const response = await axios.get(`/movie/${id}/credits?api_key=${KEY}&language=en-US`)
-    return response.data;
+    const {data} = await axios.get(`/movie/${id}/credits?api_key=${KEY}&language=en-US`)
+    return data;
   }catch (err) {
     throw err;
   }
@@ -32,8 +32,8 @@ export async function fetchFilmsCast(id) {
 
 export async function fetchFilmsReviews(id) {
   try {
-    const response = await axios.get(`/movie/${id}/reviews?api_key=${KEY}&language=en-US`)
-    return response.data;
+    const {data} = await axios.get(`/movie/${id}/reviews?api_key=${KEY}&language=en-US`)
+    return data;
   }catch (err) {
     throw err;
   }
@@ -41,10 +41,10 @@ export async function fetchFilmsReviews(id) {
 
 export async function fetchFilmWithQuery (searchQuery) {
   try {
-    const axiosResponse = await axios.get(
+    const {data} = await axios.get(
       `/search/movie?&api_key=${KEY}&language=en-US&include_adult=false&query=${searchQuery}`,
     );
-    return axiosResponse.data;
+    return data;
   } catch (err) {
     throw err;
   }
